@@ -1,0 +1,13 @@
+# .NET build output
+bin/
+obj/
+
+# User-specific / secrets - never commit your token
+*.user
+.env
+appsettings.*.local.json
+
+# IDE
+.vs/
+.idea/
+.vscode/

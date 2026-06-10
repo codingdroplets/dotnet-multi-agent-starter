@@ -1,0 +1,20 @@
+@host = http://localhost:5080
+
+### 1) Run the two-agent workflow. Returns a drafted reply AWAITING human approval.
+###    (Triage agent assesses the ticket -> Drafter agent writes the customer reply.)
+POST {{host}}/workflow/triage
+Content-Type: application/json
+
+{ "message": "My order A1234 arrived with a cracked screen and I need a replacement before Friday." }
+
+### 2) Inspect a draft by id (paste the id returned above).
+GET {{host}}/workflow/DRF-xxxxxxxx
+
+### 3) Approve a draft (the human-in-the-loop gate) before it would be sent.
+POST {{host}}/workflow/DRF-xxxxxxxx/approve
+
+### Empty message -> 400 Bad Request
+POST {{host}}/workflow/triage
+Content-Type: application/json
+
+{ "message": "" }
